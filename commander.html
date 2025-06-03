@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Commander - Béniti Top Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #128C7E;
+    }
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .logo img {
+      width: 100px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="https://i.postimg.cc/V643frNb/beniti-topup-circular.png" alt="Logo Béniti Top Up" />
+    </div>
+    <h1>Béniti Top Up</h1>
+    <form onsubmit="envoyerCommande(event)">
+      <label for="produit">Produit :</label>
+      <select id="produit" required>
+        <option value="" disabled selected>Choisissez un produit</option>
+        <option>110💎 pour 160 HTG</option>
+        <option>220💎 pour 320 HTG</option>
+        <option>340💎 pour 450 HTG</option>
+        <option>450💎 pour 680 HTG</option>
+        <option>570💎 pour 780 HTG</option>
+        <option>680💎 pour 980 HTG</option>
+        <option>1160💎 pour 1580 HTG</option>
+        <option>1730💎 pour 2250 HTG</option>
+        <option>2390💎 pour 3150 HTG</option>
+        <option>3550💎 pour 4705 HTG</option>
+        <option>6160💎 pour 7300 HTG</option>
+        <option>Plan semaine lite pour 110 HTG</option>
+        <option>Plan semaine pour 375 HTG</option>
+        <option>Plan mois pour 1700 HTG</option>
+        <option>Booyah Pass pour 400 HTG</option>
+      </select>
+
+      <label>Nom du Compte :</label>
+      <input type="text" id="nom" required />
+
+      <label>UID :</label>
+      <input type="text" id="uid" required />
+
+      <label>Mode de Paiement :</label>
+      <input type="text" value="Mon Cash" disabled />
+
+      <label>Destinateur :</label>
+      <input type="text" value="Dawins Caliste" disabled />
+
+      <label>Txn ID :</label>
+      <input type="text" id="txn" pattern="\d{12}" maxlength="12" minlength="12" required placeholder="Ex: 123456789012" />
+
+      <label>Email :</label>
+      <input type="email" id="email" required />
+
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
+
+  <script>
+    function envoyerCommande(e) {
+      e.preventDefault();
+      const produit = document.getElementById("produit").value;
+      const nom = document.getElementById("nom").value;
+      const uid = document.getElementById("uid").value;
+      const txn = document.getElementById("txn").value;
+      const email = document.getElementById("email").value;
+
+      if (!/^[0-9]{12}$/.test(txn)) {
+        alert("Le Txn ID doit contenir exactement 12 chiffres.");
+        return;
+      }
+
+      const message = \`
+*Nouvelle commande Béniti Top Up*
+Produit : \${produit}
+Nom du Compte : \${nom}
+UID : \${uid}
+Mode de Paiement : Mon Cash
+Destinateur : Dawins Caliste
+Txn ID : \${txn}
+Email : \${email}
+      \`.trim();
+
+      const redirection = \`valider.html?message=\${encodeURIComponent(message)}\`;
+      window.location.href = redirection;
+    }
+  </script>
+</body>
+</html>

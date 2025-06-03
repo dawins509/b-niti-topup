@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Valider la commande</title>
+  <script>
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const message = urlParams.get('message');
+      const numero = '50955624230';
+      const whatsappURL = `https://wa.me/${numero}?text=${encodeURIComponent(message)}`;
+      window.location.href = whatsappURL;
+
+      setTimeout(() => {
+        window.location.href = "accueil.html";
+      }, 3000);
+    }
+  </script>
+</head>
+<body>
+  <h1 style="text-align:center;">Votre commande est en cours d'envoi...</h1>
+</body>
+</html>
